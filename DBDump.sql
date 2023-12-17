@@ -546,7 +546,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `drivers_with_teams` AS select `driver`.`first_name` AS `first_name`,`driver`.`last_name` AS `last_name`,`driver`.`salary` AS `salary`,`team`.`name` AS `team_name` from (`driver` join `team` on((`driver`.`team_id` = `team`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
