@@ -564,7 +564,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `officials_roles` AS select `official`.`first_name` AS `first_name`,`official`.`last_name` AS `last_name`,`official`.`role` AS `role`,`circuit`.`name` AS `circuit_name` from (`official` join `circuit` on((`official`.`circuit_id` = `circuit`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -582,7 +582,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `race_results` AS select `race`.`race_number` AS `race_number`,`race`.`year` AS `year`,`race`.`driver_of_the_day_id` AS `driver_of_the_day_id`,`race`.`fastest_lap_driver_id` AS `fastest_lap_driver_id`,`race`.`fastest_lap_time` AS `fastest_lap_time` from `race` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -600,7 +600,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `races_with_circuit_and_weather` AS select `race`.`race_number` AS `race_number`,`race`.`year` AS `year`,`race`.`name` AS `name`,`race`.`date` AS `date`,`circuit`.`name` AS `circuit_name`,`circuit`.`country` AS `country`,`circuit`.`city` AS `city`,`weather`.`temperature` AS `temperature`,`weather`.`humidity` AS `humidity` from ((`race` join `circuit` on((`race`.`circuit_id` = `circuit`.`id`))) join `weather` on((`race`.`weather_id` = `weather`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -618,7 +618,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `season_standing` AS select `S`.`year` AS `year`,`driver`.`id` AS `driver_id`,`S`.`driver_points` AS `driver_points`,`driver`.`first_name` AS `first_name`,`driver`.`last_name` AS `last_name`,`driver`.`team_id` AS `team_id` from ((select `driver-ranks-race`.`year` AS `year`,`driver-ranks-race`.`driver_id` AS `driver_id`,sum(`driver-ranks-race`.`points`) AS `driver_points` from `driver-ranks-race` group by `driver-ranks-race`.`year`,`driver-ranks-race`.`driver_id`) `S` join `driver` on((`S`.`driver_id` = `driver`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -636,7 +636,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `season_winner_drivers` AS select `season_standing`.`year` AS `year`,`season_standing`.`driver_id` AS `driver_id`,`season_standing`.`first_name` AS `first_name`,`season_standing`.`last_name` AS `last_name` from (`season_standing` join (select `season_standing`.`year` AS `year`,max(`season_standing`.`driver_points`) AS `max_points` from `season_standing` group by `season_standing`.`year`) `T` on(((`season_standing`.`driver_points` = `T`.`max_points`) and (`season_standing`.`year` = `T`.`year`)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -654,7 +654,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `season_winner_teams` AS select `R`.`year` AS `year`,`R`.`team_id` AS `team_id`,`team`.`name` AS `name` from ((select `S`.`year` AS `year`,`S`.`team_id` AS `team_id` from ((select `season_standing`.`year` AS `year`,`season_standing`.`team_id` AS `team_id`,sum(`season_standing`.`driver_points`) AS `team_points` from `season_standing` group by `season_standing`.`year`,`season_standing`.`team_id`) `S` join (select `S`.`year` AS `year`,max(`S`.`team_points`) AS `max_points` from (select `season_standing`.`year` AS `year`,`season_standing`.`team_id` AS `team_id`,sum(`season_standing`.`driver_points`) AS `team_points` from `season_standing` group by `season_standing`.`year`,`season_standing`.`team_id`) `S` group by `S`.`year`) `T` on(((`S`.`year` = `T`.`year`) and (`S`.`team_points` = `T`.`max_points`))))) `R` join `team` on((`R`.`team_id` = `team`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -672,7 +672,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `sponsors_with_teams_count` AS select `A`.`company_id` AS `company_id`,count(0) AS `sponsored_teams_count` from (select `company`.`id` AS `id`,`company`.`website` AS `website`,`company-sponsors-team`.`company_id` AS `company_id`,`company-sponsors-team`.`team_id` AS `team_id` from (`company` join `company-sponsors-team` on((`company`.`id` = `company-sponsors-team`.`company_id`)))) `A` group by `A`.`company_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -690,7 +690,7 @@ UNLOCK TABLES;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `teams_with_total_drivers_and_total_sponsors` AS select `team`.`name` AS `name`,`team`.`city` AS `city`,`team`.`country` AS `country`,count(distinct `driver`.`id`) AS `number_of_drivers`,count(distinct `company-sponsors-team`.`company_id`) AS `number_of_sponsors` from ((`team` left join `driver` on((`team`.`id` = `driver`.`team_id`))) left join `company-sponsors-team` on((`team`.`id` = `company-sponsors-team`.`team_id`))) group by `team`.`id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
