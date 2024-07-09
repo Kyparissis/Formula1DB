@@ -36,9 +36,3 @@ The database encompasses:
 ## Entity-Relationship Diagram
 <img title="a title" alt="Alt text" src="https://github.com/Kyparissis/Formula1DB/blob/main/media/EER-diagram.png">
 
-![UML Diagram](path/to/uml_diagram.png)
-
-## Conclusion
-
-Formula1DB serves as a vital tool for anyone interested in delving into the rich history of Formula 1 racing, offering detailed and accessible data for analysis and research.
-
