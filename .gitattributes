@@ -1,5 +1,5 @@
 # Ignore all files in the repository
 * linguist-vendored
 
-# Include all files in the src directory
-example_scripts/* linguist-vendored=false
+# Include all .sql files
+*.sql linguist-vendored=false
